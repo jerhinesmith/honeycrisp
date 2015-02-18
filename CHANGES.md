@@ -1,3 +1,11 @@
+Version 0.0.2
+-------------
+
+Released February 18, 2015
+
+- Fixed a bug when calling `Honeycrisp::Subscription` without first requiring the subscription file
+
+
 Version 0.0.1
 -------------
 
