@@ -1,4 +1,4 @@
-# honeycrisp
+# honeycrisp [![Build Status](https://travis-ci.org/jerhinesmith/honeycrisp.svg?branch=master)](https://travis-ci.org/jerhinesmith/honeycrisp)
 
 A module for validating receipts with Apple's App Store. [Click here to read the full documentation.][documentation]
 
