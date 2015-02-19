@@ -21,7 +21,7 @@ module Honeycrisp
       @shared_secret  = args[0] || Honeycrisp.shared_secret
       @use_sandbox    = options.fetch(:use_sandbox, Honeycrisp.use_sandbox)
 
-      raise ArgumentError, 'Shared secret is required' if @shared_secret.nil?
+      raise ArgumentError, 'Shared secret is required' if (@shared_secret.nil? || @shared_secret.empty?)
     end
 
     def host

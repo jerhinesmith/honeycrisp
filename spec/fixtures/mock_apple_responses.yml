@@ -1,0 +1,86 @@
+# ====== verifyReceipt =====
+
+verifyReceipt:
+
+# -- Error Responses --
+  error:
+    21000:
+      status: 21000
+    21002:
+      status: 21002
+    21003:
+      status: 21003
+    21004:
+      status: 21004
+    21005:
+      status: 21005
+    21006:
+      status: 21006
+    21007:
+      status: 21007
+    21008:
+      status: 21008
+
+# -- Common Responses --
+  base_response: &base_response
+    status: 0
+    environment: Sandbox
+    receipt:
+      receipt_type: ProductionSandbox
+      bundle_id: com.exampleco.product
+      application_version: '1.0'
+      request_date: &current_time '<%= Time.now.utc.strftime('%Y-%m-%d %H:%M:%S Etc/GMT') %>'
+      request_date_ms: &current_time_ms '<%= Time.now.utc.to_i * 1000 %>'
+      request_date_pst: &current_time_pst '<%= Time.now.utc.getlocal('-08:00').strftime('%Y-%m-%d %H:%M:%S America/Los_Angeles') %>'
+      original_purchase_date: *current_time
+      original_purchase_date_ms: *current_time_ms
+      original_purchase_date_pst: *current_time_pst
+      original_application_version: '1.0'
+
+  in_app_purchase: &in_app_purchase
+    quantity: '1'
+    product_id: com.exampleco.product.name
+    transaction_id: &default_transaction_id '<%= (0...16).collect{rand(10)}.join %>'
+    original_transaction_id: *default_transaction_id
+    purchase_date: &default_purchase_date '<%= Time.now.utc.strftime('%Y-%m-%d %H:%M:%S Etc/GMT') %>'
+    purchase_date_ms: &default_purchase_date_ms '<%= Time.now.utc.to_i * 1000 %>'
+    purchase_date_pst: &default_purchase_date_pst '<%= Time.now.utc.getlocal('-08:00').strftime('%Y-%m-%d %H:%M:%S America/Los_Angeles') %>'
+    original_purchase_date: *default_purchase_date
+    original_purchase_date_ms: *default_purchase_date_ms
+    original_purchase_date_pst: *default_purchase_date_pst
+    is_trial_period: 'false'
+
+  subscription: &subscription
+    quantity: '1'
+    product_id: com.exampleco.product.name
+    transaction_id: &default_transaction_id '<%= (0...16).collect{rand(10)}.join %>'
+    original_transaction_id: *default_transaction_id
+    purchase_date: &default_purchase_date '<%= Time.now.utc.strftime('%Y-%m-%d %H:%M:%S Etc/GMT') %>'
+    purchase_date_ms: &default_purchase_date_ms '<%= Time.now.utc.to_i * 1000 %>'
+    purchase_date_pst: &default_purchase_date_pst '<%= Time.now.utc.getlocal('-08:00').strftime('%Y-%m-%d %H:%M:%S America/Los_Angeles') %>'
+    original_purchase_date: *default_purchase_date
+    original_purchase_date_ms: *default_purchase_date_ms
+    original_purchase_date_pst: *default_purchase_date_pst
+    expires_date: '<%= (Time.now.utc + (60 * 60 * 24 * 30)).strftime('%Y-%m-%d %H:%M:%S Etc/GMT') %>'
+    expires_date_ms: '<%= (Time.now.utc + (60 * 60 * 24 * 30)).to_i * 1000 %>'
+    expires_date_pst: '<%= (Time.now.utc + (60 * 60 * 24 * 30)).getlocal('-08:00').strftime('%Y-%m-%d %H:%M:%S America/Los_Angeles') %>'
+    web_order_line_item_id: *default_transaction_id
+    is_trial_period: 'false'
+
+# -- Receipts --
+
+  receipts:
+
+# -- Receipt with In App Purchase --
+    in_app:
+      <<: *base_response
+      in_app:
+        - *in_app_purchase
+
+# -- Receipt with Subscription --
+    subscription:
+      <<: *base_response
+      latest_receipt_info:
+        - *subscription
+      latest_receipt: |
+        <%= Base64.encode64('testreceipt') %>

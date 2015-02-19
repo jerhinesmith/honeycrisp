@@ -37,3 +37,7 @@ Gemfile.lock
 
 ## OSX
 .DS_Store
+
+
+## Binstubs
+bin
