@@ -69,4 +69,16 @@ describe Honeycrisp::Client do
       expect(honeycrisp.host).to eq('https://buy.itunes.apple.com')
     end
   end
+
+  describe 'validating a receipt' do
+    before do
+      @client = Honeycrisp::Client.new('someSecret')
+    end
+
+    it 'queries Apple for a receipt' do
+      receipt = @client.validate_receipt('cafebabe')
+
+      expect(receipt).to be_an_instance_of(Honeycrisp::Receipt)
+    end
+  end
 end

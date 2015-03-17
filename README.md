@@ -7,7 +7,7 @@ A module for validating receipts with Apple's App Store. [Click here to read the
 To install using [Bundler][bundler] grab the latest stable version:
 
 ```ruby
-gem 'honeycrisp', '~> 0.0.1'
+gem 'honeycrisp', '~> 0.0.2'
 ```
 
 To manually install `honeycrisp` via [Rubygems][rubygems] simply gem install:
@@ -60,6 +60,7 @@ This library supports has been manually tested agains the following Ruby
 implementations:
 
 - Ruby 2.1.0
+- Ruby 2.2.1
 
 ## More Information
 
